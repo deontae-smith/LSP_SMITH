@@ -1,19 +1,30 @@
-package org.howard.edu.lsp.assignment5.implementation;
+package org.howard.edu.lsp.assignment6.integerset;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.BooleanSupplier;
+import org.howard.edu.lsp.assignment5.implementation.IntegerSetException;
+
+
+import org.howard.edu.lsp.assignment5.implementation.IntegerSetException;
+
 
 public class IntegerSet{
-  
-   private ArrayList<Integer> list= new ArrayList<Integer>();
-  
-   public IntegerSet(ArrayList<Integer> list) {
-       this.list=list;
-   }
-  
-  
-  
+	  
+	   private ArrayList<Integer> list= new ArrayList<Integer>();
+	  
+	   public IntegerSet(ArrayList<Integer> list) {
+	       this.list=list;
+	   }
+	  
+	  
  
-   /** clears the all representation of class
+
+
+
+/** clears the all representation of class
     * 
     */
 
@@ -158,9 +169,12 @@ public class IntegerSet{
     * 
     * @param list2
     * @return
+ * @throws IntegerSetException 
     */
-   public IntegerSet union(IntegerSet list2) {
-      
+   public IntegerSet union(IntegerSet list2) throws RuntimeException  {
+	   
+	   if (list.isEmpty() || list2.isEmpty())
+		   throw new RuntimeException("Empty set in union");
        ArrayList<Integer> temp=list2.getlist();
       
        Set<Integer> set = new HashSet<>();
@@ -174,6 +188,8 @@ public class IntegerSet{
        return list4;
       
    }
+      
+  
   
    /**   return intersection of of 2 sets
     * 
@@ -181,7 +197,9 @@ public class IntegerSet{
     * @return
     */
    public IntegerSet intersection(IntegerSet list2) {
-      
+	   if (list.isEmpty() || list2.isEmpty())
+		   throw new RuntimeException("Empty set in union");
+	      
        ArrayList<Integer> temp=list2.getlist();
       
        list.retainAll(temp);
@@ -190,6 +208,7 @@ IntegerSet list4= new IntegerSet(list);
       
        return list4;
    }
+ 
   
    /**    returns difference of 2 sets
     * 
@@ -197,7 +216,7 @@ IntegerSet list4= new IntegerSet(list);
     * @return
     */
    public IntegerSet difference (IntegerSet list2) {
-      
+	      
        ArrayList<Integer> temp=list2.getlist();
       
        // Remove all elements in list2 from list
@@ -208,10 +227,38 @@ IntegerSet list4= new IntegerSet(list);
        return list4;
       
    }
+
+public boolean isEmpty() {
+	if (list.isEmpty() == true) {
+		return true;
+		
+	}
+	else {
+		return false;
+	}
+	// TODO Auto-generated method stub
+	
+}
+
+
+public boolean contains(int vaule) {
+	if (list.contains(vaule) == true){
+		return true;
+		
+	}
+	else {
+		return false;
+	}
+}
   
-   public ArrayList<Integer> getlist(){
-       return list;
-   }
+
+public String toString() {
+	return list.toString();
+}
   
-  
+
+public ArrayList<Integer> getlist(){
+    return list;
+}
+
 }
